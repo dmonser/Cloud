@@ -1,7 +1,6 @@
 package ru.netology.Cloud.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Controller {
@@ -19,5 +18,11 @@ public class Controller {
     @GetMapping("/admin")
     public String admin() {
         return "Hello, admin!";
+    }
+
+    @GetMapping("/login")
+    public String login(@RequestHeader("auth-token") String token) {
+        System.out.println(token);
+        return token;
     }
 }
