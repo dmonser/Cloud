@@ -2,6 +2,8 @@ package ru.netology.Cloud.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 public class Controller {
 
@@ -20,9 +22,15 @@ public class Controller {
         return "Hello, admin!";
     }
 
-    @GetMapping("/login")
-    public String login(@RequestHeader("auth-token") String token) {
-        System.out.println(token);
-        return token;
+//    @PostMapping("/login")
+//    public String login(@RequestHeader("auth-token") String token) {
+//        System.out.println(token);
+//        return token;
+//    }
+    @PostMapping("/login")
+    public String login() {
+//        System.out.println(headers);
+//        System.out.println(body);
+        return "{\"auth-token\"=: \"zldigtbujplbzfgudibpuigbpofiuzgb\"}";
     }
 }
