@@ -2,6 +2,7 @@ package ru.netology.Cloud.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -20,6 +21,11 @@ public class Controller {
     @GetMapping("/admin")
     public String admin() {
         return "Hello, admin!";
+    }
+
+    @GetMapping("/info")
+    public String userData(Principal principal) {
+        return principal.getName();
     }
 
 //    @PostMapping("/login")
