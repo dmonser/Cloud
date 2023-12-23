@@ -2,7 +2,6 @@ package ru.netology.Cloud.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.util.Collection;
 
@@ -16,7 +15,7 @@ public class User {
     private Long id;
 
     @Column(name = "username")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
