@@ -1,12 +1,29 @@
 package ru.netology.Cloud.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import ru.netology.Cloud.dtos.JwtRequest;
+import ru.netology.Cloud.dtos.JwtResponse;
+import ru.netology.Cloud.exceptions.AppError;
+import ru.netology.Cloud.service.UserService;
+import ru.netology.Cloud.utils.JwtTokenUtils;
 
 import java.security.Principal;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 public class Controller {
+
+    private final UserService userService;
+    private final JwtTokenUtils jwtTokenUtils;
+    private final AuthenticationManager authenticationManager;
 
     @GetMapping("/hello")
     public String hello() {
@@ -28,15 +45,16 @@ public class Controller {
         return principal.getName();
     }
 
-//    @PostMapping("/login")
-//    public String login(@RequestHeader("auth-token") String token) {
-//        System.out.println(token);
-//        return token;
-//    }
     @PostMapping("/login")
-    public String login() {
-//        System.out.println(headers);
-//        System.out.println(body);
-        return "{\"auth-token\"=: \"zldigtbujplbzfgudibpuigbpofiuzgb\"}";
+    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Некорректный логин или пароль"), HttpStatus.UNAUTHORIZED);
+        }
+
+        UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());
+        String token = jwtTokenUtils.generateToken(userDetails);
+        return ResponseEntity.ok(new JwtResponse(token));
     }
 }
