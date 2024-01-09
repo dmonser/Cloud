@@ -19,7 +19,7 @@ public class Authentication {
     private final UserService userService;
 
     public boolean authenticate(String login, String password) {
-        if (login.isEmpty() && password.isEmpty()) {
+        if (login.isEmpty() || password.isEmpty()) {
             return false;
         }
 
