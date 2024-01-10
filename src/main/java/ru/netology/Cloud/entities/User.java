@@ -3,7 +3,9 @@ package ru.netology.Cloud.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,4 +32,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Collection<Role> roles;
+
+    @OneToMany(cascade = CascadeType.ALL,
+    mappedBy = "user")
+    private List<File> files = new ArrayList<>();
 }
