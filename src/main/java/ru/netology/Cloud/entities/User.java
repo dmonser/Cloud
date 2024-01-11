@@ -36,4 +36,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL,
     mappedBy = "user")
     private List<File> files = new ArrayList<>();
+
+    public void addFileToUser(File file) {
+        file.setUser(this);
+        files.add(file);
+    }
 }
