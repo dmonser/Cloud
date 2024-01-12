@@ -33,8 +33,8 @@ public class User {
     )
     private Collection<Role> roles;
 
-    @OneToMany(cascade = CascadeType.ALL,
-    mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner")
     private List<File> files = new ArrayList<>();
 
     public void addFileToUser(File file) {

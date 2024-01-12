@@ -18,13 +18,14 @@ public class FileService {
         File file;
 
         if (uploadFile.getSize() != 0) {
-            file = toFileEntity(uploadFile);
+            file = toFileEntity(uploadFile, user);
             user.addFileToUser(file);
         }
     }
 
-    private File toFileEntity(MultipartFile uploadFile) throws IOException {
+    private File toFileEntity(MultipartFile uploadFile, User user) throws IOException {
         File file = new File();
+        file.setOwner(user.getId());
         file.setName(uploadFile.getName());
         file.setOriginalName(file.getOriginalName());
         file.setContentType(uploadFile.getContentType());

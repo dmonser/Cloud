@@ -18,6 +18,9 @@ public class File {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "owner")
+    private Long owner;
+
     @Column(name = "name")
     private String name;
 
@@ -36,5 +39,4 @@ public class File {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private User user;
-
 }
