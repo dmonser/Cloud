@@ -68,7 +68,7 @@ public class SecurityConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:8081")
+                .allowedOrigins("http://localhost:8080")
                 .allowedMethods("*");
             }
         };
