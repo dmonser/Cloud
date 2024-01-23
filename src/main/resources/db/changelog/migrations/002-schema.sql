@@ -1,4 +1,4 @@
 create table cloud.roles (
-    id serial primary key,
-    "name" varchar(50) not null
+    id bigserial primary key,
+    "name" varchar(50) not null unique
 );
