@@ -12,26 +12,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Table(name = "users")
-@Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
+//@Entity
+//@Table(name = "users")
+//@Getter
+//@Setter
+//@Accessors(chain = true)
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Collection<Role> roles = List.of();
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @Column(unique = true, nullable = false)
+//    private String username;
+//
+//    @Column(nullable = false)
+//    private String password;
+//
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    private Collection<Role> roles = List.of();
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,12 +55,12 @@ public class User {
 //    )
 //    private Collection<Role> roles;
 //
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner")
-    private List<File> files = new ArrayList<>();
-
-    public void addFileToUser(File file) {
-        file.setUser(this);
-        files.add(file);
-    }
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "owner")
+//    private List<File> files = new ArrayList<>();
+//
+//    public void addFileToUser(File file) {
+//        file.setUser(this);
+//        files.add(file);
+//    }
 }

@@ -18,8 +18,8 @@ public class File {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "owner")
-    private Long owner;
+//    @Column(name = "owner")
+//    private Long owner;
 
     @Column(name = "name")
     private String name;
@@ -37,6 +37,6 @@ public class File {
     @Column(name = "bytes")
     private byte[] bytes;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private User user;
+//    @ManyToOne(cascade = CascadeType.REFRESH)
+//    private User user;
 }

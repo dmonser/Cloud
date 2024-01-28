@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-//    private final RoleRepository roleRepository;
-
-    @Override
-    public User getByLogin(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("Username=[%s] not found", username)));
-    }
+public class UserServiceImpl /*implements UserService*/ {
+//    private final UserRepository userRepository;
+////    private final RoleRepository roleRepository;
+//
+//    @Override
+//    public User getByLogin(String username) {
+//        return userRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException(String.format("Username=[%s] not found", username)));
+//    }
 //    @Override
 //    @Transactional
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

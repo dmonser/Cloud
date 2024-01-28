@@ -7,19 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Entity
-@Table(name = "roles")
-@Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
+//@Entity
+//@Table(name = "roles")
+//@Getter
+//@Setter
+//@Accessors(chain = true)
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
-
-    @Column(name = "name")
-    private String name;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
+//    private Integer id;
+//
+//    @Column(name = "name")
+//    private String name;
 }

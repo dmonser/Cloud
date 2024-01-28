@@ -10,13 +10,13 @@ import ru.netology.Cloud.service.UserServiceImpl;
 
 @Service
 @RequiredArgsConstructor
-public class DefaultUserDetailsService implements UserDetailsService {
-    private final UserServiceImpl userService;
-    private final UserDetailsMapper userDetailsMapper;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final var user = userService.getByLogin(username);
-        return userDetailsMapper.mapUserToUserDetails(user);
-    }
+public class DefaultUserDetailsService /*implements UserDetailsService*/ {
+//    private final UserServiceImpl userService;
+//    private final UserDetailsMapper userDetailsMapper;
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        final var user = userService.getByLogin(username);
+//        return userDetailsMapper.mapUserToUserDetails(user);
+//    }
 }
