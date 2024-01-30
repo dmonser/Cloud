@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FileServiceImpl implements FileService{
+public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
 
     @Override
@@ -42,7 +42,7 @@ public class FileServiceImpl implements FileService{
     @Override
     public void deleteFile(String fileName) {
         Optional<File> optFile = fileRepository.findFileByOriginalName(fileName);
-        if(optFile.isEmpty()) {
+        if (optFile.isEmpty()) {
             throw new RuntimeException(String.format("File '%s' not found", fileName));
         }
         File file = optFile.get();
@@ -60,6 +60,7 @@ public class FileServiceImpl implements FileService{
         return fileRepository.findFileByOriginalName(fileName).orElseThrow(() -> new RuntimeException("File not found"));
     }
 
+    @Override
     public Iterable<File> getFiles(int size) {
         PageRequest diapason = PageRequest.of(0, size);
         try {
@@ -70,6 +71,7 @@ public class FileServiceImpl implements FileService{
         return List.of();
     }
 
+    @Override
     public List<File> toFilesList(Iterable<File> files) {
         List<File> result = new ArrayList<>();
         for (File fileObj : files) {

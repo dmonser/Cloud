@@ -2,13 +2,11 @@ package ru.netology.Cloud.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,11 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import ru.netology.Cloud.jwt.JwtAuthEntryPoint;
 import ru.netology.Cloud.jwt.JwtAuthenticationFilter;
-import ru.netology.Cloud.service.UserServiceImpl;
+import ru.netology.Cloud.service.UserService;
 
 
 @EnableWebSecurity
@@ -30,11 +26,8 @@ import ru.netology.Cloud.service.UserServiceImpl;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-//    private final JwtAuthenticationFilter authenticationFilter;
-//    private final JwtAuthEntryPoint authEntryPoint;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -53,25 +46,6 @@ public class SecurityConfiguration {
                 .and().addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(authEntryPoint)
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/cloud/login/").permitAll()
-//                .anyRequest().permitAll()
-//                .and()
-//                .httpBasic();
-////        http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
-//    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -97,9 +71,9 @@ public class SecurityConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                .allowCredentials(true)
-                .allowedOrigins("http://localhost:8080")
-                .allowedMethods("*");
+                        .allowCredentials(true)
+                        .allowedOrigins("http://localhost:8080")
+                        .allowedMethods("*");
             }
         };
     }

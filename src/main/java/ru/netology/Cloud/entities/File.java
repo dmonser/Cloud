@@ -2,6 +2,7 @@ package ru.netology.Cloud.entities;
 
 
 import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,6 @@ public class File {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
-//    @Column(name = "owner")
-//    private Long owner;
 
     @Column(name = "name")
     private String name;
@@ -37,6 +35,4 @@ public class File {
     @Column(name = "bytes")
     private byte[] bytes;
 
-//    @ManyToOne(cascade = CascadeType.REFRESH)
-//    private User user;
 }
