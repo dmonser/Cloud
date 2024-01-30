@@ -7,7 +7,7 @@ values
 ('user', '$2a$10$4.sPD.GJWjBWs/9nbaO/AOy3RKGi2wk0CEqrex63zW94VbGfV1qEK'),
 ('admin', '$2a$10$/QIRBWcY/7gIXTaCKsHbTOYvTW6fVyw4AC1tBmtkp1AYI4hFuKiwa');
 
-insert into cloud.user_roles (user_id, role_id)
+insert into cloud.users_roles (user_id, role_id)
 values
 (1, 1),
 (2, 2);
