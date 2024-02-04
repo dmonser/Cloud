@@ -44,9 +44,4 @@ public class AuthController {
     public ResponseEntity<?> logout(@RequestHeader("auth-token") String authToken) {
         return ResponseEntity.ok().body("logout");
     }
-
-    @GetMapping("/info")
-    public ResponseEntity<?> userData(Principal principal) {
-        return ResponseEntity.ok(principal.getName());
-    }
 }
