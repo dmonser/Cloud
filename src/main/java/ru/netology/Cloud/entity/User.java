@@ -1,4 +1,4 @@
-package ru.netology.Cloud.entities;
+package ru.netology.Cloud.entity;
 
 import javax.persistence.*;
 
@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")

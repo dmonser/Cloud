@@ -29,14 +29,17 @@ public class SecurityConfiguration {
     private final UserService userService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private static final String PATH_LOGIN = "/cloud/login";
+    private static final String PATH_INFO = "/cloud/info";
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers("/cloud/login").permitAll()
-                .antMatchers("/cloud/info").authenticated()
+                .antMatchers(PATH_LOGIN).permitAll()
+                .antMatchers(PATH_INFO).authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

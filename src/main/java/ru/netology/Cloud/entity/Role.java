@@ -1,4 +1,4 @@
-package ru.netology.Cloud.entities;
+package ru.netology.Cloud.entity;
 
 import javax.persistence.*;
 

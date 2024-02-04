@@ -1,8 +1,8 @@
-package ru.netology.Cloud.repositories;
+package ru.netology.Cloud.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.netology.Cloud.entities.Role;
+import ru.netology.Cloud.entity.Role;
 
 import java.util.Optional;
 

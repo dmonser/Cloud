@@ -1,4 +1,4 @@
-package ru.netology.Cloud.exceptions;
+package ru.netology.Cloud.exception;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package ru.netology.Cloud.dtos;
+package ru.netology.Cloud.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

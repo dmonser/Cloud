@@ -1,8 +1,7 @@
 package ru.netology.Cloud.service;
 
 import org.springframework.web.multipart.MultipartFile;
-import ru.netology.Cloud.entities.File;
-import ru.netology.Cloud.entities.User;
+import ru.netology.Cloud.entity.File;
 
 import java.io.IOException;
 import java.util.List;

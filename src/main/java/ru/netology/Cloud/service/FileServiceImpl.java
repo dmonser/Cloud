@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.netology.Cloud.entities.File;
-import ru.netology.Cloud.repositories.FileRepository;
+import ru.netology.Cloud.entity.File;
+import ru.netology.Cloud.repository.FileRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;

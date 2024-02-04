@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.netology.Cloud.entities.File;
+import ru.netology.Cloud.entity.File;
 import ru.netology.Cloud.service.FileServiceImpl;
 
 import java.io.IOException;

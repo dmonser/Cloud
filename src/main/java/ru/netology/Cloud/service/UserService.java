@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.netology.Cloud.entities.User;
-import ru.netology.Cloud.repositories.UserRepository;
+import ru.netology.Cloud.entity.User;
+import ru.netology.Cloud.repository.UserRepository;
 
 import java.util.Optional;
 import java.util.stream.Collectors;

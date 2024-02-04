@@ -8,9 +8,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import ru.netology.Cloud.dtos.LoginRequest;
-import ru.netology.Cloud.dtos.LoginResponse;
-import ru.netology.Cloud.exceptions.AppError;
+import ru.netology.Cloud.dto.LoginRequest;
+import ru.netology.Cloud.dto.LoginResponse;
+import ru.netology.Cloud.exception.AppError;
 import ru.netology.Cloud.jwt.JwtTokenUtils;
 import ru.netology.Cloud.service.UserService;
 

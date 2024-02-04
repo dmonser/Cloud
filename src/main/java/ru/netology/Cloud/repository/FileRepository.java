@@ -1,8 +1,8 @@
-package ru.netology.Cloud.repositories;
+package ru.netology.Cloud.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.netology.Cloud.entities.File;
+import ru.netology.Cloud.entity.File;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
