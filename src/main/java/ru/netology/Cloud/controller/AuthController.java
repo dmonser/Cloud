@@ -16,7 +16,7 @@ import ru.netology.Cloud.service.UserService;
 
 import java.security.Principal;
 
-@RequestMapping("/cloud")
+//@RequestMapping("/cloud")
 @RestController
 @RequiredArgsConstructor
 public class AuthController {

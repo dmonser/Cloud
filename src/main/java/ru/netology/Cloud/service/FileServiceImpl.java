@@ -2,8 +2,12 @@ package ru.netology.Cloud.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.multipart.MultipartFile;
+import ru.netology.Cloud.dto.FileResponse;
 import ru.netology.Cloud.entity.File;
 import ru.netology.Cloud.repository.FileRepository;
 
@@ -21,9 +25,14 @@ public class FileServiceImpl implements FileService {
     public void saveFile(MultipartFile uploadFile) throws IOException {
         File file;
 
-        if (uploadFile.getSize() != 0) {
-            file = toFileEntity(uploadFile);
+        if (uploadFile.getSize() == 0) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data");
+        }
+        file = toFileEntity(uploadFile);
+        try {
             fileRepository.save(file);
+        } catch (HttpServerErrorException exception) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error upload data");
         }
     }
 
@@ -43,45 +52,46 @@ public class FileServiceImpl implements FileService {
     public void deleteFile(String fileName) {
         Optional<File> optFile = fileRepository.findFileByOriginalName(fileName);
         if (optFile.isEmpty()) {
-            throw new RuntimeException(String.format("File '%s' not found", fileName));
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data");
         }
         File file = optFile.get();
-        fileRepository.delete(file);
-    }
-
-    @Override
-    public boolean fileExists(String fileName) {
-        Optional<File> optFile = fileRepository.findFileByOriginalName(fileName);
-        return optFile.isPresent();
+        try {
+            fileRepository.delete(file);
+        } catch (HttpServerErrorException e) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error delete file");
+        }
     }
 
     @Override
     public File getFile(String fileName) {
-        return fileRepository.findFileByOriginalName(fileName).orElseThrow(() -> new RuntimeException("File not found"));
+        try {
+            return fileRepository.findFileByOriginalName(fileName).orElseThrow(() ->
+                    new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data"));
+        } catch (HttpServerErrorException e) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error download file");
+        }
     }
 
     @Override
-    public Iterable<File> getFiles(int size) {
+    public List<FileResponse> getFileList(int size) {
+        Iterable<File> files = getFiles(size);
+        List<FileResponse> result = new ArrayList<>();
+        for (File fileObj : files) {
+            FileResponse fileResponse = new FileResponse(fileObj.getOriginalName(), fileObj.getSize());
+            result.add(fileResponse);
+        }
+        return result;
+    }
+
+    private Iterable<File> getFiles(int size) {
+        if (size <= 0) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data");
+        }
         PageRequest diapason = PageRequest.of(0, size);
         try {
             return fileRepository.findAll(diapason);
-        } catch (RuntimeException e) {
-            System.out.println(e);
+        } catch (HttpServerErrorException exception) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error getting file list");
         }
-        return List.of();
-    }
-
-    @Override
-    public List<File> toFilesList(Iterable<File> files) {
-        List<File> result = new ArrayList<>();
-        for (File fileObj : files) {
-            File file = new File();
-            file.setId(fileObj.getId());
-            file.setOriginalName(fileObj.getOriginalName());
-            file.setSize(fileObj.getSize());
-            file.setContentType(fileObj.getContentType());
-            result.add(file);
-        }
-        return result;
     }
 }

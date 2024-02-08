@@ -1,6 +1,7 @@
 package ru.netology.Cloud.service;
 
 import org.springframework.web.multipart.MultipartFile;
+import ru.netology.Cloud.dto.FileResponse;
 import ru.netology.Cloud.entity.File;
 
 import java.io.IOException;
@@ -14,11 +15,7 @@ public interface FileService {
 
     File toFileEntity(MultipartFile uploadFile) throws IOException;
 
-    boolean fileExists(String fileName);
-
     File getFile(String fileName);
 
-    Iterable<File> getFiles(int size);
-
-    List<File> toFilesList(Iterable<File> files);
+    List<FileResponse> getFileList(int size);
 }
