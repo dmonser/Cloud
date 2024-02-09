@@ -44,7 +44,7 @@ public class DataController {
     }
 
     @GetMapping("/list") // Get all files
-    public ResponseEntity<?> getFilesList(@RequestParam("limit") int limit) {
+    public ResponseEntity<List<FileResponse>> getFilesList(@RequestParam("limit") int limit) {
         List<FileResponse> result = fileService.getFileList(limit);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

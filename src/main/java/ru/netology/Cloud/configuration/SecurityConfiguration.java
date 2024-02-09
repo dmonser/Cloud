@@ -29,7 +29,7 @@ public class SecurityConfiguration {
     private final UserService userService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    private static final String PATH_LOGIN = "/cloud/login";
+    private static final String PATH_LOGIN = "/login";
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -73,7 +73,7 @@ public class SecurityConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowCredentials(true)
-                        .allowedOrigins("http://localhost:8080")
+                        .allowedOrigins("http://localhost:8081")
                         .allowedMethods("*");
             }
         };

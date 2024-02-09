@@ -12,6 +12,8 @@ import ru.netology.Cloud.dto.LoginRequest;
 import ru.netology.Cloud.dto.LoginResponse;
 import ru.netology.Cloud.exception.AppError;
 import ru.netology.Cloud.jwt.JwtTokenUtils;
+import ru.netology.Cloud.service.AuthService;
+import ru.netology.Cloud.service.AuthServiceImpl;
 import ru.netology.Cloud.service.UserService;
 
 import java.security.Principal;
@@ -24,24 +26,20 @@ public class AuthController {
     private final UserService userService;
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
+    private final AuthServiceImpl authService;
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.login(), loginRequest.password()));
-        } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
-        }
-
-        UserDetails userDetails = userService.loadUserByUsername(loginRequest.login());
-        String token = jwtTokenUtils.generateToken(userDetails);
-        return ResponseEntity.ok(new LoginResponse(token));
+        final var response = authService.login(loginRequest);
+        return ResponseEntity.ok(response);
     }
 
 
     // TODO: 30.01.2024 Logout
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestHeader("auth-token") String authToken) {
+        authService.logout(authToken);
         return ResponseEntity.ok().body("logout");
     }
 }
