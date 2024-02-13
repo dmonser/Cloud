@@ -16,7 +16,7 @@ import ru.netology.Cloud.jwt.JwtTokenUtils;
 public class AuthServiceImpl implements AuthService{
 
     private final AuthenticationManager authenticationManager;
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     private final JwtTokenUtils jwtTokenUtils;
 
     @Override
@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService{
         } catch (HttpClientErrorException.Unauthorized exception) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Bad credentials");
         }
-        UserDetails userDetails = userService.loadUserByUsername(loginRequest.login());
+        UserDetails userDetails = userServiceImpl.loadUserByUsername(loginRequest.login());
         String token = jwtTokenUtils.generateToken(userDetails);
         return new LoginResponse(token);
     }
