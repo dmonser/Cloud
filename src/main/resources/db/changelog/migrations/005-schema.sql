@@ -5,6 +5,5 @@ create table cloud.files (
     original_name varchar(100) not null,
     size bigserial not null,
     content_type varchar(20) not null,
-    bytes bytea not null,
-    foreign key (owner) references cloud.users ("id")
+    bytes bigint not null
 )
