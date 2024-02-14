@@ -16,7 +16,7 @@ import ru.netology.Cloud.jwt.JwtTokenUtils;
 public class AuthServiceImpl implements AuthService{
 
     private final AuthenticationManager authenticationManager;
-    private final UserServiceImpl userServiceImpl;
+    private final UserService userServiceImpl;
     private final JwtTokenUtils jwtTokenUtils;
 
     @Override

@@ -19,7 +19,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.netology.Cloud.jwt.JwtAuthenticationFilter;
 import ru.netology.Cloud.service.UserService;
-import ru.netology.Cloud.service.UserServiceImpl;
 
 
 @EnableWebSecurity
@@ -27,7 +26,7 @@ import ru.netology.Cloud.service.UserServiceImpl;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     private static final String PATH_LOGIN = "/login";
