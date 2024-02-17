@@ -13,8 +13,6 @@ public interface FileService {
 
     void deleteFile(String fileName);
 
-    File toFileEntity(MultipartFile uploadFile) throws IOException;
-
     File getFile(String fileName);
 
     List<FileResponse> getFileList(int size);

@@ -9,6 +9,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.multipart.MultipartFile;
 import ru.netology.Cloud.dto.FileResponse;
 import ru.netology.Cloud.entity.File;
+import ru.netology.Cloud.mapper.FilesMapper;
 import ru.netology.Cloud.repository.FileRepository;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
+    private final FilesMapper filesMapper;
 
     @Override
     public void saveFile(MultipartFile uploadFile) throws IOException {
@@ -28,24 +30,12 @@ public class FileServiceImpl implements FileService {
         if (uploadFile.getSize() == 0) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data");
         }
-        file = toFileEntity(uploadFile);
+        file = filesMapper.mapMultipartFileToFile(uploadFile);
         try {
             fileRepository.save(file);
         } catch (HttpServerErrorException exception) {
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error upload data");
         }
-    }
-
-    @Override
-    public File toFileEntity(MultipartFile uploadFile) throws IOException {
-        File file = new File();
-//        file.setOwner(user.getId());
-        file.setName(uploadFile.getName());
-        file.setOriginalName(uploadFile.getOriginalFilename());
-        file.setContentType(uploadFile.getContentType());
-        file.setSize(uploadFile.getSize());
-        file.setBytes(uploadFile.getBytes());
-        return file;
     }
 
     @Override
