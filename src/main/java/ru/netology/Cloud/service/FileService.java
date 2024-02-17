@@ -15,5 +15,5 @@ public interface FileService {
 
     File getFile(String fileName);
 
-    List<FileResponse> getFileList(int size);
+    List<FileResponse> getFileResponseList(int size);
 }

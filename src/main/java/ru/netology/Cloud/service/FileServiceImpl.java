@@ -63,23 +63,18 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<FileResponse> getFileList(int size) {
-        Iterable<File> files = getFiles(size);
-        List<FileResponse> result = new ArrayList<>();
-        for (File fileObj : files) {
-            FileResponse fileResponse = new FileResponse(fileObj.getOriginalName(), fileObj.getSize());
-            result.add(fileResponse);
-        }
-        return result;
+    public List<FileResponse> getFileResponseList(int size) {
+        return getFileList(size).stream()
+                .map(filesMapper::mapToFileResponse)
+                .toList();
     }
 
-    private Iterable<File> getFiles(int size) {
+    private List<File> getFileList(int size) {
         if (size <= 0) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data");
         }
-        PageRequest diapason = PageRequest.of(0, size);
         try {
-            return fileRepository.findAll(diapason);
+            return fileRepository.findFilesWithLimit(size);
         } catch (HttpServerErrorException exception) {
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Error getting file list");
         }
