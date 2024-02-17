@@ -15,7 +15,7 @@ import ru.netology.Cloud.service.FileServiceImpl;
 import java.io.IOException;
 import java.util.List;
 
-//@RequestMapping("/cloud")
+@RequestMapping
 @RestController
 @RequiredArgsConstructor
 public class DataController {
@@ -23,15 +23,15 @@ public class DataController {
     private final FileServiceImpl fileService;
 
     @PostMapping("/file") // Upload file to server
-    public ResponseEntity<String> fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<Void> fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
         fileService.saveFile(file);
-        return ResponseEntity.ok("Success upload");
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/file") // Delete file
-    public ResponseEntity<String> fileDelete(@RequestParam("filename") String fileName) {
+    public ResponseEntity<Void> fileDelete(@RequestParam("filename") String fileName) {
         fileService.deleteFile(fileName);
-        return ResponseEntity.ok("Success deleted");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/file") // Download file from cloud
