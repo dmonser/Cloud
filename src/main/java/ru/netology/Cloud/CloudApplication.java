@@ -10,9 +10,4 @@ public class CloudApplication {
 		SpringApplication.run(CloudApplication.class, args);
 	}
 
-//	public static void main(String[] args) {
-//		SpringApplication app = new SpringApplication(CloudApplication.class);
-//		app.setBannerMode(Banner.Mode.OFF);
-//		app.run(args);
-//	}
 }

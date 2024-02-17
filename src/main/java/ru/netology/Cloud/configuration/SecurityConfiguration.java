@@ -2,6 +2,7 @@ package ru.netology.Cloud.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,14 +19,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.netology.Cloud.jwt.JwtAuthenticationFilter;
+import ru.netology.Cloud.property.CorsProperties;
 import ru.netology.Cloud.service.UserService;
 
 
-@EnableWebSecurity
+@Configuration
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
-
     private final UserService userService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -64,18 +65,5 @@ public class SecurityConfiguration {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowCredentials(true)
-                        .allowedOrigins("http://localhost:8081")
-                        .allowedMethods("*");
-            }
-        };
     }
 }
