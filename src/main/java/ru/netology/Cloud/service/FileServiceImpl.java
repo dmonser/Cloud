@@ -1,7 +1,6 @@
 package ru.netology.Cloud.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -13,7 +12,6 @@ import ru.netology.Cloud.mapper.FilesMapper;
 import ru.netology.Cloud.repository.FileRepository;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

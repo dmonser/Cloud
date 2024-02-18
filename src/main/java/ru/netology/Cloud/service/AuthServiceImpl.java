@@ -13,7 +13,7 @@ import ru.netology.Cloud.jwt.JwtTokenUtils;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userServiceImpl;

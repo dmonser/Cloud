@@ -21,7 +21,7 @@ public class AuthController {
         log.info(String.format("User '%s' success login", loginRequest.login()));
         return ResponseEntity.ok(response);
     }
-    
+
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("auth-token") String authToken) {
         authService.logout(authToken);

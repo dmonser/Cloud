@@ -6,8 +6,6 @@ import ru.netology.Cloud.dto.FileResponse;
 import ru.netology.Cloud.entity.File;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class FilesMapper {

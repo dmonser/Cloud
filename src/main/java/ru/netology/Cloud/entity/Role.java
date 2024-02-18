@@ -1,12 +1,12 @@
 package ru.netology.Cloud.entity;
 
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
