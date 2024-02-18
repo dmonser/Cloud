@@ -69,6 +69,13 @@ public class FileServiceImpl implements FileService {
                 .toList();
     }
 
+    @Override
+    public void editFileName(String fileName, String actualName) {
+        File file = getFile(fileName);
+        file.setOriginalName(actualName);
+        fileRepository.save(file);
+    }
+
     private List<File> getFileList(int size) {
         if (size <= 0) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Error input data");

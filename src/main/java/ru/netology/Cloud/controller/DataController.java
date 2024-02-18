@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.netology.Cloud.dto.FileResponse;
+import ru.netology.Cloud.dto.PutRequest;
 import ru.netology.Cloud.entity.File;
 import ru.netology.Cloud.service.FileServiceImpl;
 
@@ -22,19 +23,19 @@ public class DataController {
 
     private final FileServiceImpl fileService;
 
-    @PostMapping("/file") // Upload file to server
+    @PostMapping("/file")
     public ResponseEntity<Void> fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
         fileService.saveFile(file);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/file") // Delete file
+    @DeleteMapping("/file")
     public ResponseEntity<Void> fileDelete(@RequestParam("filename") String fileName) {
         fileService.deleteFile(fileName);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/file") // Download file from cloud
+    @GetMapping("/file")
     public ResponseEntity<ByteArrayResource> fileDownload(@RequestParam("filename") String fileName) {
         File file = fileService.getFile(fileName);
         return ResponseEntity.ok()
@@ -43,7 +44,13 @@ public class DataController {
                 .body(new ByteArrayResource(file.getBytes()));
     }
 
-    @GetMapping("/list") // Get all files
+    @PutMapping("/file")
+    public ResponseEntity<Void> editFileName(@RequestParam("filename") String filename, @RequestBody PutRequest putRequest) {
+        fileService.editFileName(filename, putRequest.filename());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/list")
     public ResponseEntity<List<FileResponse>> getFilesList(@RequestParam("limit") int limit) {
         List<FileResponse> result = fileService.getFileResponseList(limit);
         return new ResponseEntity<>(result, HttpStatus.OK);

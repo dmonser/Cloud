@@ -16,4 +16,6 @@ public interface FileService {
     File getFile(String fileName);
 
     List<FileResponse> getFileResponseList(int size);
+
+    void editFileName(String fileName, String actualName);
 }
